@@ -6,23 +6,27 @@ public class complexNumber {
     ToDo:
 
     Constructors:
-        1) Zero constructor
-        2) Complex constructor
-        3) Copy constructor
-        etc. setters and getters
+        +1) Zero constructor
+        +2) Complex constructor
+        +3) Copy constructor
+        +etc. setters and getters
 
     Operations:
-        1) length
-        2) conjugate
-        3) reciprocal
-        4) arithmetic:
-            1. plus
-            2. minus
-            3. multiply
-            4. divide
-        5) print (1, 2, 3, 4)
-        6) Is it complex?
-
+        +1) length
+        +2) conjugate
+        +3) reciprocal
+        +4) arithmetic:
+            +1. plus
+            +2. minus
+            +3. multiply
+            +4. divide
+        +5) print (1, 2, 3, 4)
+        +6) Is it complex?
+        7) Translate to angle form
+        8) Translate to normal form
+        9) Power
+        10) Normalize in normal form
+        11) Normalize in angle form
 
 
      */
@@ -70,93 +74,84 @@ public class complexNumber {
     }
     public double length () {
         return Math.sqrt(
-                this.real*this.real +
-                        this.complex*this.complex);
+                getReal()*getReal() +
+                        getComplex()*getComplex());
     }
 
 
     //conjugation of the number
     public complexNumber conjugate () {
-        return new complexNumber(this.real, -this.complex);
+        return new complexNumber(getReal(), -getComplex());
     }
 
 
 
     //reciprocal --- (1/x)
     public complexNumber reciprocal () {
-        complexNumber result = new complexNumber(conjugate());
-        result.divide(result.length()*result.length()).print();
-
-        return result.divide(result.length() * result.length());
+        return conjugate().divide(length()*length());
     }
-
 
 
     // arithmetic operations
     public complexNumber sum(complexNumber x) {
         return new complexNumber(
-                this.real + x.getReal(),
-                this.complex + x.getComplex());
+                getReal() + x.getReal(),
+                getComplex() + x.getComplex());
     }
-    public complexNumber sum(int x) {
+    public static complexNumber sum(complexNumber x, complexNumber y) {
         return new complexNumber(
-                this.real + x,
-                this.complex);
+                x.getReal() + y.getReal(),
+                x.getComplex() + y.getComplex());
     }
-
     public complexNumber sum (double x) {
         return new complexNumber(
-                this.real + x,
-                this.complex);
+                getReal() + x,
+                getComplex());
     }
 
     public complexNumber minus (complexNumber x) {
         return new complexNumber(
-                this.real - x.getReal(),
-                this.complex - x.getComplex());
+                getReal() - x.getReal(),
+                getComplex() - x.getComplex());
     }
-    public complexNumber minus (int x) {
+    public static complexNumber minus (complexNumber y, complexNumber x) {
         return new complexNumber(
-                this.real - x,
-                this.complex);
+                y.getReal() - x.getReal(),
+                y.getComplex() - x.getComplex());
     }
-
     public complexNumber minus (double x) {
         return new complexNumber(
-                this.real - x,
-                this.complex);
+                getReal() - x,
+                getComplex());
     }
 
     public complexNumber multiply (complexNumber x) {
         return new complexNumber(
-                this.real * x.getReal() - this.complex * x.getComplex(),
-                - this.real * x.getComplex() - this.complex * x.getReal());
+                getReal() * x.getReal() - getComplex() * x.getComplex(),
+                getReal() * x.getComplex() + getComplex() * x.getReal());
     }
-    public complexNumber multiply (int x) {
+    public static complexNumber multiply (complexNumber y, complexNumber x) {
         return new complexNumber(
-                this.real * x,
-                -this.complex * x);
-
+                y.getReal() * x.getReal() - y.getComplex() * x.getComplex(),
+                y.getReal() * x.getComplex() + y.getComplex() * x.getReal());
     }
     public complexNumber multiply (double x) {
         return new complexNumber(
-                this.real * x,
-                -this.complex * x);
+                getReal() * x,
+                getComplex() * x);
 
     }
 
     public complexNumber divide (complexNumber x) {
         return new complexNumber(multiply(x.reciprocal()));
     }
-    public complexNumber divide (int x) {
-        return new complexNumber(
-                this.real / x,
-                this.complex / x);
+    public static complexNumber divide (complexNumber y, complexNumber x) {
+        return new complexNumber(y.multiply(x.reciprocal()));
     }
     public complexNumber divide (double x) {
         return new complexNumber(
-                this.real / x,
-                this.complex / x);
+                getReal() / x,
+                getComplex() / x);
     }
 
 
@@ -170,6 +165,7 @@ public class complexNumber {
     public static boolean isComplex (complexNumber x) {
         return (x.getComplex() == 0);
     }
+
 
 
     //printers
@@ -193,16 +189,16 @@ public class complexNumber {
         if (isComplex()) {
             System.out.println(getReal());
         } else {
-            char sign = (this.complex > 0) ? '+' : '-';
-            System.out.println(this.real + " " + sign + " i" + Math.abs(this.complex));
+            char sign = (getComplex() > 0) ? '+' : '-';
+            System.out.println(getReal() + " " + sign + " i" + Math.abs(getComplex()));
         }
     }
     public void print () {
         if (isComplex()) {
             System.out.print(getReal());
         } else {
-            char sign = (this.complex > 0) ? '+' : '-';
-            System.out.print(this.real + " " + sign + " i" + Math.abs(this.complex));
+            char sign = (getComplex() > 0) ? '+' : '-';
+            System.out.print(getReal() + " " + sign + " i" + Math.abs(getComplex()));
 
         }
     }
