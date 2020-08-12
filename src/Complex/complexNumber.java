@@ -1,6 +1,35 @@
 package Complex;
 
 public class complexNumber {
+
+    /*
+    ToDo:
+    Constructors:
+        1) Zero constructor
+        2) Complex constructor
+        3) Copy constructor
+        etc. setters and getters
+
+    Operations:
+        1) length
+        2) conjugate
+        3) reciprocal
+        4) arithmetic:
+            1. plus
+            2. minus
+            3. multiply
+            4. divide
+        5) print (1, 2, 3, 4)
+        6) Is it complex?
+
+
+
+
+
+
+     */
+
+
     private double real;
     private double complex;
 
@@ -58,7 +87,9 @@ public class complexNumber {
     //reciprocal --- (1/x)
     public complexNumber reciprocal () {
         complexNumber result = new complexNumber(conjugate());
-        return result.divide(result.length()* result.length());
+        result.divide(result.length()*result.length()).print();
+
+        return result.divide(result.length() * result.length());
     }
 
 
@@ -101,7 +132,7 @@ public class complexNumber {
     public complexNumber multiply (complexNumber x) {
         return new complexNumber(
                 this.real * x.getReal() - this.complex * x.getComplex(),
-                this.real * x.getComplex() - this.complex * x.getReal());
+                - this.real * x.getComplex() - this.complex * x.getReal());
     }
     public complexNumber multiply (int x) {
         return new complexNumber(
@@ -134,18 +165,49 @@ public class complexNumber {
 
 
 
+    /// check is it complex
+    public boolean isComplex () {
+        return (getComplex() == 0);
+    }
+    public static boolean isComplex (complexNumber x) {
+        return (x.getComplex() == 0);
+    }
 
 
     //printers
+    public static void println (complexNumber x) {
+        if (x.isComplex()) {
+            System.out.println(x.getReal());
+        } else {
+            char sign = (x.getComplex() > 0) ? '+' : '-';
+            System.out.println(x.getReal() + " " + sign + " i" + Math.abs(x.getComplex()));
+        }
+    }
     public static void print (complexNumber x) {
-        char sign = (x.getComplex() >= 0) ? '+' : '-';
-        System.out.print(x.getReal() + " " + sign + " i" + Math.abs(x.getComplex()));
+        if (x.isComplex()) {
+            System.out.print(x.getReal());
+        } else {
+            char sign = (x.getComplex() > 0) ? '+' : '-';
+            System.out.print(x.getReal() + " " + sign + " i" + Math.abs(x.getComplex()));
+        }
+    }
+    public void println () {
+        if (isComplex()) {
+            System.out.println(getReal());
+        } else {
+            char sign = (this.complex > 0) ? '+' : '-';
+            System.out.println(this.real + " " + sign + " i" + Math.abs(this.complex));
+        }
     }
     public void print () {
-        char sign = (this.complex >= 0) ? '+' : '-';
-        System.out.print(this.real + " " + sign + " i" + Math.abs(this.complex));
-    }
+        if (isComplex()) {
+            System.out.print(getReal());
+        } else {
+            char sign = (this.complex > 0) ? '+' : '-';
+            System.out.print(this.real + " " + sign + " i" + Math.abs(this.complex));
 
+        }
+    }
 
 
 }

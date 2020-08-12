@@ -2,9 +2,13 @@ package Complex;
 
 public class check {
     public static void main(String[] args) {
-        complexNumber z = new complexNumber(3, 4);
-        z.print();
-        System.out.println();
-        z.reciprocal().print();
+        complexNumber z1 = new complexNumber(3, 0);
+        complexNumber z2 = new complexNumber(3, 4);
+
+
+        z1.println();
+        z2.println();
+
+
     }
 }
